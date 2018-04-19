@@ -86,7 +86,7 @@ public class TCPServerService extends Service {
         BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         //用于向客户端发送消息
         PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())),true);
-        out.print("欢迎来到聊天室");
+        out.println("欢迎来到聊天室");
         while (!mIsServiceDestroyed){
             String str= in.readLine();
             Log.i(TAG,str);

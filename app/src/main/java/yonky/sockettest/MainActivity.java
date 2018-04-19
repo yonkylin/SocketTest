@@ -7,9 +7,11 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button mSendButton;
     private TextView mMessageTextView;
+    private EditText mMessageEditText;
 
     private Socket mClientSocket;
     private PrintWriter mPrintWriter;
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mSendButton = (Button) findViewById(R.id.send);
         mMessageTextView = (TextView) findViewById(R.id.msg_container);
+        mMessageEditText = (EditText)findViewById(R.id.msg);
         mSendButton.setOnClickListener(this);
         Intent service = new Intent(this,TCPServerService.class);
         startService(service);
@@ -68,6 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if(view ==mSendButton){
             final String msg = mMessageEditText.getText().toString();
+            if(!TextUtils.isEmpty(msg) &&mPrintWriter!=null){
+                mPrintWriter.println(msg);
+                mMessageEditText.setText("");
+                String time = formatDataTime(System.currentTimeMillis());
+                final String showedMsg = "self "+time+":"+msg+"\n";
+                mMessageTextView.setText(mMessageTextView.getText()+showedMsg);
+            }
         }
     }
 
