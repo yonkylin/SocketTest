@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.SimpleTimeZone;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    public static String TAG="SOCKET CLIENT";
+    private static final String TAG="SOCKET CLIENT";
     private static final int MESSAGE_RECEIVE_NEW_MSG=1;
     private static final int MESSAGE_SOCKET_CONNECTED = 2;
 

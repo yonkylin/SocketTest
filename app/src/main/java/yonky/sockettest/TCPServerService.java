@@ -73,7 +73,7 @@ public class TCPServerService extends Service {
                                 e.printStackTrace();
                             }
                         }
-                    };
+                    }.start();
                 }catch (IOException e){
                     e.printStackTrace();
                 }
